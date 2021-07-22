@@ -17,16 +17,26 @@ The documentation states:
   `ExAws.S3.initiate_multipart_upload/3`.
 
 But the problem is that the spec for the upload function is 
-  @spec upload(
+```
+@spec upload(
           source :: Enumerable.t(),
           bucket :: String.t(),
           path :: String.t(),
           opts :: upload_opts
         ) :: __MODULE__.Upload.t()
-
+```
   with 
-
+  ```
   @type upload_opt :: {:max_concurrency, pos_integer} | initiate_multipart_upload_opt
+
   @type upload_opts :: [upload_opt]
+  ```
 
   so the additional options are not part of the function spec and cause the dialyzer to fail.
+
+
+To see the dialyzer fail, clone this repo then run
+```
+mix deps.get
+mix dialyzer
+```
